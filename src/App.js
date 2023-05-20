@@ -1,10 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from "react-router-dom";
+
+import AllMeetupsPage from "./pages/AllMeetups";
+import NewMeetupPage from "./pages/NewMeetup";
+import FavouritesPage from "./pages/Favourites";
 
 function App() {
   return (
     <div>
-      
+      <Route path="/" exact>
+        <AllMeetupsPage />
+      </Route>
+      <Route path="/new-meetup">
+        <NewMeetupPage />
+      </Route>
+      <Route path="/favourites">
+        <FavouritesPage />
+      </Route>
     </div>
   );
 }
