@@ -7,15 +7,17 @@ import FavouritesPage from "./pages/Favourites";
 function App() {
   return (
     <div>
-      <Route path="/" exact>
-        <AllMeetupsPage />
-      </Route>
-      <Route path="/new-meetup">
-        <NewMeetupPage />
-      </Route>
-      <Route path="/favourites">
-        <FavouritesPage />
-      </Route>
+      <Switch>
+        <Route path="/" exact>
+          <AllMeetupsPage />
+        </Route>
+        <Route path="/new-meetup">
+          <NewMeetupPage />
+        </Route>
+        <Route path="/favourites">
+          <FavouritesPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
