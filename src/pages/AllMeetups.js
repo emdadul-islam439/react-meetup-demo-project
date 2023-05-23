@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import MeetupList from "../components/meetups/MeetupList";
 
@@ -27,20 +27,31 @@ function AllMeetupsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
 
-  fetch(
-    "https://react-getting-started-34414-default-rtdb.firebaseio.com/meetups.json",
-    {
-      method: "GET",
-    }
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setIsLoading(false);
-      setLoadedMeetups(data);
-      console.log(data);
-    });
+  useEffect(() => {
+    fetch(
+      "https://react-getting-started-34414-default-rtdb.firebaseio.com/meetups.json",
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const meetups = [];
+        for (const key in data) {
+          const meetup = {
+            id: data[key],
+            ...data[key],
+          };
+          meetups.push(meetup);
+        }
+
+        setIsLoading(false);
+        setLoadedMeetups(meetups);
+        console.log(data);
+      });
+  }, []);
 
   if (isLoading) {
     return (
@@ -53,7 +64,7 @@ function AllMeetupsPage() {
   return (
     <section>
       <h1>All Meetups</h1>
-      <MeetupList meetups={DUMMY_DATA} />
+      <MeetupList meetups={loadedMeetups} />
     </section>
   );
 }
