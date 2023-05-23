@@ -6,8 +6,9 @@ const FavouriteContext = createContext({
 })
 
 function FavouriteContextProvider(props){
+    const constext = {}
 
-    return <FavouriteContext.Provider>
+    return <FavouriteContext.Provider value={context}>
         {props.children}
     </FavouriteContext.Provider>
 }
